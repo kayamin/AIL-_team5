@@ -3,16 +3,16 @@ OpenPose output 腕立て伏せ
 
 ## directories, files
 
-### pict_push-ups_orig/
+### `pict_push-ups_orig/`
 腕立て伏せの画像の置き場
 
-#### pict_push-ups/0_up/
+#### `pict_push-ups/0_up/`
 腕を伸ばしている状態の画像
 
-#### pict_push-ups/1_down/
+#### `pict_push-ups/1_down/`
 腕を曲げている状態の画像
 
-### pose_push-ups_COCO/
+### `pose_push-ups_COCO/`
 **OpenPose** による PoseKeyPoints(特徴点) の出力結果の置き場。
 **COCO Model** を利用。
 
@@ -21,14 +21,14 @@ OpenPose output 腕立て伏せ
 特徴点の出力結果。
 
 
-### pict_push-ups_COCO/
+### `pict_push-ups_COCO/`
 **OpenPose** による PoseKeyPoints(特徴点) の出力画像の置き場。
 たとえば、`pict_push-ups/0_up/` にある画像の特徴点の出力画像は
 `pict_push-ups_COCO/0_up/`
 
 ## output format
 
-### pose_COCO/ にある特徴点の出力結果のフォーマット
+### `pose_push-ups_COCO/` にある特徴点の出力結果のフォーマット
 各行は、1つの画像に対する出力。
 18個の特徴点の `(x,y,score)` が並び、最後にファイル名がある。すなわち、以下の55列のデータ。：
 
