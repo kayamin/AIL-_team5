@@ -1,7 +1,7 @@
 OpenPose ‚É‚æ‚é˜r—§‚Ä•š‚¹‰æ‘œ‚Ì‰ğÍ
 ============================
 
-## directories, files
+## ¡ directories, files
 
 ### ˜r—§‚Ä•š‚¹‰æ‘œ(2017”N11Œ21“úB‰e)
 
@@ -49,7 +49,8 @@ OpenPose ‚É‚æ‚é PoseKeyPoints(“Á’¥“_) ‚Ì **o—Í‰æ‘œ** ‚Ì’u‚«êB**COCO Model** ‚
 
 
 
-## output format
+
+## ¡ output format
 
 ### `*_push-ups_COCO-pose/` ‚È‚Ç‚É‚ ‚é“Á’¥“_‚Ìo—ÍŒ‹‰Ê‚ÌƒtƒH[ƒ}ƒbƒg
 Šes‚ÍA1‚Â‚Ì‰æ‘œ‚É‘Î‚·‚éo—ÍB
