@@ -392,6 +392,28 @@ def read_2d_predictions( actions, data_dir ):
   return train_set, test_set, data_mean, data_std, dim_to_ignore, dim_to_use
 
 
+def read_2d_predictinos_OpenPose(data_dir):
+    """
+    OpenPose 2D関節位置推定結果を読み込み
+    データの標準化については学習時に用いたデータの平均，分散で行わなくては意味が無いか？
+    提供されている学習済みモデルは StackedHourglass の推定結果で学習したもの
+    改めて SH 推定結果からテストする場合には 学習時に用いた SH推定データの平均と分散を用いて標準化
+
+    OpenPose 推定出力に対しては用いるのはおかしいか，，， -> 姿勢推定をSHで統一するか，OpenPose予想結果からモデルを再学習させるか
+    かつ，SHで学習した 18 KeyPoint のうち， OpenPose出力に含まれていないものは 0 になっている -> NN の中ではこの関節部分の次元が
+    周りの関節の位置推定にも影響してしまうと考えるとおかしい出力を生んでしまう可能性がある．
+
+    OpenPose 出力を MPⅡ形式にしてもらう -> SH形式に変換 -> 学習に用いたSHデータの平均，分散から標準化
+    - 学習に用いたSHデータは画像領域に対して存在する人の位置，大きさを調整しているのか？そうだとすると，wild-image から直接位置を推定できて
+    　しまう　OpenPose 出力をそのまま使ってしまうのは問題か．
+    - 論文では入力画像の位置やサイズを明らかに調整している
+    2017/12/2 Kayama
+    """
+    test_set = load_OpenPose()
+
+
+
+
 def create_2d_data( actions, data_dir, rcams ):
   """
   Creates 2d poses by projecting 3d poses with the corresponding camera
