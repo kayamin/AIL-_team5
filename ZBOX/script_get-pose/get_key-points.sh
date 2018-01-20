@@ -1,0 +1,64 @@
+#!/bin/sh
+
+# ■ 関節座標作成方法
+# 1. 1_extract_from_image_get-keypoints.cpp を
+#    /home/team05/Downloads/openpose/examples/user_code にコピーしてmakeする
+#
+# 2. 腹筋の画像を以下のフォルダに置く：
+#    /home/team05/Downloads/openpose/pict_sit-up/1.pict/up/"
+#    /home/team05/Downloads/openpose/pict_sit-up/1.pict/down/"
+#
+# 3. このシェルスクリプトを実行
+#    chmod +x get_keypoints.sh
+#    ./get_key-points.sh
+
+#HOME="/home/omron/deep-learning-lecture/team5/openpose-work/"
+HOME="/home/team05/Downloads/openpose_zmq/"
+
+#DIR_HOME="${HOME}/pict_push-ups/"
+#DIR_HOME="${HOME}/pict_push-ups-from-side/"
+#DIR_HOME="${HOME}/animation_push-ups/"
+#DIR_HOME="${HOME}/animation_push-ups-from-side/"
+
+#DIR_HOME="${HOME}/pict_sit-up/"
+DIR_HOME="${HOME}/mirror_test2/"
+
+DIR_IN="${DIR_HOME}/1-1.pict/"
+DIR_OUT_POSE="${DIR_HOME}/2-1.COCO-pose/"
+DIR_OUT_PICT="${DIR_HOME}/2-2.COCO-pict/"
+
+DIR_BIN=${HOME}
+FILE_BIN="${DIR_BIN}/build/examples/user_code/1_extract_from_image_get-key-points.bin"
+
+# OpenPose の　input, output filename
+PICT1="$HOME/1.jpg"
+PICT2="$HOME/2.jpg"
+
+make_directory(){
+    if [ ! -d $1 ]; then mkdir -p $1; fi
+}
+
+make_directory $DIR_OUT_PICT
+make_directory $DIR_OUT_POSE
+
+# OpenPose 実行
+cd $DIR_BIN
+for d in `ls -d $DIR_IN/*`
+do
+    echo "-----------"
+    echo $d
+
+    DIR_OUT_NOW=$DIR_OUT_PICT/`basename $d`
+    make_directory $DIR_OUT_NOW
+    CSV=${DIR_OUT_POSE}/`basename $d`.csv
+    echo -n "" > $CSV
+    for f in $d/*.*
+    do
+	BASE=`basename $f`
+	echo $BASE
+	cp $f $PICT1
+	$FILE_BIN >> $CSV
+	echo $BASE >> $CSV
+	cp $PICT2 ${DIR_OUT_NOW}/$BASE
+    done
+done 

@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#HOME="/home/omron/deep-learning-lecture/team5/openpose-work/"
+HOME="/home/team05/Downloads/openpose_zmq/"
+
+DIR_HOME="${HOME}/movie_test2/"
+
+DIR_IN="${DIR_HOME}/0.movie/"
+DIR_OUT="${DIR_HOME}/1.pict/"
+
+make_directory(){
+    if [ ! -d $1 ]; then mkdir -p $1; fi
+}
+
+
+for f in ${DIR_IN}/*.{MOV,mov,mp4,MP4,M4V,m4v}
+do
+    [ -f $f ] || continue
+    echo $f
+    BASE=`basename $f | sed -e 's|\.[a-zA-Z0-9]*$||'`
+    echo $BASE
+    DIR_ANIMATION="$DIR_OUT/$BASE"
+    make_directory $DIR_ANIMATION
+    ffmpeg -i $f -vcodec mjpeg $DIR_ANIMATION/${BASE}.%04d.jpg
+done
